@@ -1,0 +1,6 @@
+# Quartus Project File for Bit-Serial Bus System
+# Target: Altera DE0-Nano Board (Cyclone IV E)
+
+QUARTUS_VERSION = "20.1"
+DATE = "2025-10-14"
+PROJECT_REVISION = "bitserial"

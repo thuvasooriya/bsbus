@@ -1,0 +1,163 @@
+# Quartus Settings File for Bit-Serial Bus System
+# Target: Altera DE0-Nano Board (Cyclone IV E EP4CE22F17C6)
+
+set_global_assignment -name FAMILY "Cyclone IV E"
+set_global_assignment -name DEVICE EP4CE22F17C6
+set_global_assignment -name TOP_LEVEL_ENTITY bitserial_top
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "2025-10-14"
+set_global_assignment -name LAST_QUARTUS_VERSION "20.1.0 Lite Edition"
+
+# Device and Board Settings
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name DEVICE_FILTER_PACKAGE FBGA
+set_global_assignment -name DEVICE_FILTER_PIN_COUNT 256
+set_global_assignment -name DEVICE_FILTER_SPEED_GRADE 6
+
+# Compilation Settings
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+
+# SystemVerilog Support
+set_global_assignment -name VERILOG_INPUT_VERSION SYSTEMVERILOG_2005
+set_global_assignment -name VERILOG_SHOW_LMF_MAPPING_MESSAGES OFF
+
+# Timing Analysis
+set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS ON
+set_global_assignment -name SMART_RECOMPILE ON
+set_global_assignment -name NUM_PARALLEL_PROCESSORS ALL
+
+# Pin Assignments
+
+# System Clock - 50 MHz onboard oscillator
+set_location_assignment PIN_R8 -to clk_i
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to clk_i
+
+# Reset - KEY0 pushbutton (active-low)
+set_location_assignment PIN_J15 -to rst_ni
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to rst_ni
+
+# Master 0 Interface - Switches SW[7:0] for address, SW[9:8] for control
+set_location_assignment PIN_M1 -to m_req_i[0]
+set_location_assignment PIN_T8 -to m_req_i[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to m_req_i[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to m_req_i[1]
+
+set_location_assignment PIN_B9 -to m_we_i[0]
+set_location_assignment PIN_M15 -to m_we_i[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to m_we_i[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to m_we_i[1]
+
+# Master Address Inputs - SW[7:0] for Master 0
+set_location_assignment PIN_M1 -to m_addr_i[0][0]
+set_location_assignment PIN_T8 -to m_addr_i[0][1]
+set_location_assignment PIN_B9 -to m_addr_i[0][2]
+set_location_assignment PIN_M15 -to m_addr_i[0][3]
+set_location_assignment PIN_C15 -to m_addr_i[0][4]
+set_location_assignment PIN_D15 -to m_addr_i[0][5]
+set_location_assignment PIN_G15 -to m_addr_i[0][6]
+set_location_assignment PIN_F15 -to m_addr_i[0][7]
+set_location_assignment PIN_L2 -to m_addr_i[0][8]
+set_location_assignment PIN_M2 -to m_addr_i[0][9]
+set_location_assignment PIN_E1 -to m_addr_i[0][10]
+set_location_assignment PIN_F2 -to m_addr_i[0][11]
+
+# Master Address Inputs - Reuse for Master 1 (demo limitation)
+set_location_assignment PIN_M1 -to m_addr_i[1][0]
+set_location_assignment PIN_T8 -to m_addr_i[1][1]
+set_location_assignment PIN_B9 -to m_addr_i[1][2]
+set_location_assignment PIN_M15 -to m_addr_i[1][3]
+set_location_assignment PIN_C15 -to m_addr_i[1][4]
+set_location_assignment PIN_D15 -to m_addr_i[1][5]
+set_location_assignment PIN_G15 -to m_addr_i[1][6]
+set_location_assignment PIN_F15 -to m_addr_i[1][7]
+set_location_assignment PIN_L2 -to m_addr_i[1][8]
+set_location_assignment PIN_M2 -to m_addr_i[1][9]
+set_location_assignment PIN_E1 -to m_addr_i[1][10]
+set_location_assignment PIN_F2 -to m_addr_i[1][11]
+
+# Master Write Data - Use switches for demo
+set_location_assignment PIN_M1 -to m_wdata_i[0][0]
+set_location_assignment PIN_T8 -to m_wdata_i[0][1]
+set_location_assignment PIN_B9 -to m_wdata_i[0][2]
+set_location_assignment PIN_M15 -to m_wdata_i[0][3]
+set_location_assignment PIN_C15 -to m_wdata_i[0][4]
+set_location_assignment PIN_D15 -to m_wdata_i[0][5]
+set_location_assignment PIN_G15 -to m_wdata_i[0][6]
+set_location_assignment PIN_F15 -to m_wdata_i[0][7]
+
+set_location_assignment PIN_M1 -to m_wdata_i[1][0]
+set_location_assignment PIN_T8 -to m_wdata_i[1][1]
+set_location_assignment PIN_B9 -to m_wdata_i[1][2]
+set_location_assignment PIN_M15 -to m_wdata_i[1][3]
+set_location_assignment PIN_C15 -to m_wdata_i[1][4]
+set_location_assignment PIN_D15 -to m_wdata_i[1][5]
+set_location_assignment PIN_G15 -to m_wdata_i[1][6]
+set_location_assignment PIN_F15 -to m_wdata_i[1][7]
+
+# Master Output Signals - LEDs for status
+set_location_assignment PIN_A15 -to m_gnt_o[0]
+set_location_assignment PIN_A13 -to m_gnt_o[1]
+set_location_assignment PIN_B13 -to m_ready_o[0]
+set_location_assignment PIN_A11 -to m_ready_o[1]
+set_location_assignment PIN_D1 -to m_err_o[0]
+set_location_assignment PIN_F3 -to m_err_o[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to m_gnt_o[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to m_gnt_o[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to m_ready_o[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to m_ready_o[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to m_err_o[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to m_err_o[1]
+
+# Master Read Data - LEDs LED[7:0]
+set_location_assignment PIN_A15 -to m_rdata_o[0][0]
+set_location_assignment PIN_A13 -to m_rdata_o[0][1]
+set_location_assignment PIN_B13 -to m_rdata_o[0][2]
+set_location_assignment PIN_A11 -to m_rdata_o[0][3]
+set_location_assignment PIN_D1 -to m_rdata_o[0][4]
+set_location_assignment PIN_F3 -to m_rdata_o[0][5]
+set_location_assignment PIN_B1 -to m_rdata_o[0][6]
+set_location_assignment PIN_L3 -to m_rdata_o[0][7]
+
+set_location_assignment PIN_A15 -to m_rdata_o[1][0]
+set_location_assignment PIN_A13 -to m_rdata_o[1][1]
+set_location_assignment PIN_B13 -to m_rdata_o[1][2]
+set_location_assignment PIN_A11 -to m_rdata_o[1][3]
+set_location_assignment PIN_D1 -to m_rdata_o[1][4]
+set_location_assignment PIN_F3 -to m_rdata_o[1][5]
+set_location_assignment PIN_B1 -to m_rdata_o[1][6]
+set_location_assignment PIN_L3 -to m_rdata_o[1][7]
+
+# Inter-board Serial Interface - GPIO_0 pins [7:0]
+# Reserved for future inter-board communication
+# set_location_assignment PIN_D3 -to serial_sdata_out
+# set_location_assignment PIN_C3 -to serial_sclk_out
+# set_location_assignment PIN_A2 -to serial_svalid_out
+# set_location_assignment PIN_A3 -to serial_sready_in
+# set_location_assignment PIN_B3 -to serial_sdata_in
+# set_location_assignment PIN_B4 -to serial_sclk_in
+# set_location_assignment PIN_A4 -to serial_svalid_in
+# set_location_assignment PIN_B5 -to serial_sready_out
+
+# RTL Source Files
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/bus_pkg.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/bitserial_top.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/parallel_to_serial.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/serial_to_parallel.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/serializer.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/deserializer.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/tx_controller.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/frame_decoder.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/serial_arbiter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/addr_decoder.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/slave_mem.sv
+
+# Timing Constraints
+set_global_assignment -name SDC_FILE bitserial.sdc
+
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
