@@ -24,6 +24,8 @@ TB_DIR := "tb"
 BUILD_DIR := "build"
 FPGA_DIR := "fpga"
 
+REPORT_DIR := "report"
+
 default:
     @just --list
 
@@ -340,3 +342,16 @@ quartus-clean:
     rm -rf db incremental_db output_files
     rm -f *.rpt *.summary *.qws *.jdi *.sld *.stp
     rm -f *.done *.pin *.smsg *.qpf~ *.qsf~
+
+# =============================================================================
+# REPORT GENERATION
+# =============================================================================
+
+report:
+    cd {{ REPORT_DIR }} && typst compile main.typ main.pdf --root ..
+
+report-watch:
+    cd {{ REPORT_DIR }} && typst watch main.typ main.pdf --root ..
+
+report-diagrams:
+    cd {{ REPORT_DIR }}/diagrams && uv run generate_diagrams.py

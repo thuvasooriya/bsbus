@@ -85,10 +85,12 @@ module frame_decoder
       err_q <= err_d;
       valid_q <= valid_d;
 
+      // synthesis translate_off
       if (state_q != state_d) begin
-        $display("[%0t] FRAME_DEC: State %0s -> %0s (frame_valid_i=%b, valid_o=%b)", $time,
-                 state_q.name(), state_d.name(), frame_valid_i, valid_q);
+        $display("[%0t] FRAME_DEC: State %0d -> %0d (frame_valid_i=%b, valid_o=%b)", $time,
+                 state_q, state_d, frame_valid_i, valid_q);
       end
+      // synthesis translate_on
     end
   end
 
